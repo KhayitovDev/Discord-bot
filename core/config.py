@@ -1,7 +1,5 @@
 
-import os 
 from pydantic import MongoDsn
-from pydantic_core import Url
 from pydantic_settings import BaseSettings
 
 
@@ -18,5 +16,14 @@ class Settings(BaseSettings):
     @property
     def mongo_dsn(self) -> MongoDsn:
         return MongoDsn(f"mongodb://localhost:27017")
+    
+    
+    KAFKA_BROKER: str = 'localhost:19092'
+    KAFKA_TOPIC: str = 'wikipedia-recent-changes'
+    GROUP_ID: str = 'discord-consumer-group'
+    WIKI_STREAM_URL: str = "https://stream.wikimedia.org/v2/stream/recentchange"
+    
+    DISCORD_TOKEN: str
+    CHANNEL_ID: int
     
 settings = Settings()

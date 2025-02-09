@@ -6,7 +6,7 @@ from pymongo.errors import ConnectionFailure
 from beanie import init_beanie
 from connections import Connection
 
-from app.models import WikipediaChanges
+from app.models import LanguagePreference, WikipediaChanges
 
 from core.logger import logger
 from core.config import settings
@@ -25,7 +25,7 @@ class AsyncMongoConnection(Connection):
             db = motor_client.get_database(settings.MONGO_DB_NAME, codec_options=codec_options)
             await init_beanie(
                 database=db,
-                document_models=[WikipediaChanges], #we include beanie models here 
+                document_models=[WikipediaChanges, LanguagePreference], #we include beanie models here 
                 multiprocessing_mode=True
             )
             logger.info("Connected to AsyncMongoConnection\n")
